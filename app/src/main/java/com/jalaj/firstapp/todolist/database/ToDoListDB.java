@@ -60,7 +60,11 @@ public class ToDoListDB extends SQLiteOpenHelper {
         Log.d("Template",template);
         return template;
     }
+    public String dropTable(String tableName)
+    {
 
+       return "DROP TABLE "+ tableName;
+    }
     public void fillMetaData()
     {
         database = getWritableDatabase();
@@ -82,26 +86,32 @@ public class ToDoListDB extends SQLiteOpenHelper {
 
     }
 
-    private void createTables()
+    public void createTables()
     {
 
         database = getWritableDatabase();
         String [][] colArray0 = {{"category_id","INTEGER","PRIMARY KEY"},{"description","TEXT"," "}};
+        database.execSQL( dropTable(TD_CATEGORY_TBL));
         database.execSQL(getCreateQuery(TD_CATEGORY_TBL,colArray0));
         //create reminder master table
         String [][] colArray1 = {{"reminder_id","INTEGER","PRIMARY KEY"},{"description","TEXT"," "}};
+        database.execSQL( dropTable(TD_REMINDER_MASTER_TBL));
         database.execSQL(getCreateQuery(TD_REMINDER_MASTER_TBL,colArray1));
         //create note master table
+        database.execSQL(dropTable(TD_NOTE_MASTER_TBL));
         String [][] colArray2 = {{"note_id","INTEGER","PRIMARY KEY"},{"content","TEXT"," "},{"last_updated_dttm","TEXT"," "},{"created_dttm","TEXT"," "}};
         database.execSQL(getCreateQuery(TD_NOTE_MASTER_TBL,colArray2));
         //create category table
-        String [][] colArray3 = {{"note_id","INTEGER","PRIMARY KEY"},{"category_id","INTEGER"," "}};
+        String [][] colArray3 = {{"note_id","INTEGER",""},{"category_id","INTEGER"," "}};
+        database.execSQL( dropTable(TD_NOTE_CATEGORY_TBL));
         database.execSQL(getCreateQuery(TD_NOTE_CATEGORY_TBL,colArray3));
         //create category table
-        String [][] colArray4 = {{"note_id","INTEGER","PRIMARY KEY"},{"priority","TEXT"," "},{"done_flag","INTEGER",""}};
+        String [][] colArray4 = {{"note_id","INTEGER",""},{"priority","TEXT"," "},{"done_flag","INTEGER",""}};
+        database.execSQL(dropTable(TD_NOTE_PRIORITY_TBL));
         database.execSQL(getCreateQuery(TD_NOTE_PRIORITY_TBL,colArray4));
         //create category table
-        String [][] colArray5 = {{"note_id","INTEGER","PRIMARY KEY"},{"reminder_id","TEXT"," "}};
+        String [][] colArray5 = {{"note_id","INTEGER",""},{"reminder_id","INTEGER"," "}};
+        database.execSQL(dropTable(TD_NOTE_REMINDER_TBL));
         database.execSQL(getCreateQuery(TD_NOTE_REMINDER_TBL,colArray5));
     }
     public Cursor getSelectSQL(String tableName, String [] colName, String whereClause, String [] parameters)
@@ -124,6 +134,53 @@ public class ToDoListDB extends SQLiteOpenHelper {
     private void testData()
     {
 
+    }
+
+    public boolean insertDataToTable(String tableName, String [][] valueArray)
+    {
+        database = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        for (int i=0; i<valueArray.length;i++)
+        values.put(valueArray[i][0],valueArray[i][1]);
+
+        database.insert(tableName,null,values);
+
+        database.close();
+
+
+
+        return  true;
+    }
+
+    public boolean updateData(String tableName, String[][] updateValues, String whereClause, String [] whereParams)
+    {
+        database = getWritableDatabase();
+
+        ContentValues updateParams = new ContentValues();
+        for (int i=0; i<updateValues.length;i++)
+            updateParams.put(updateValues[i][0],updateValues[i][1]);
+
+        database.update(tableName,updateParams,whereClause,whereParams);
+
+        database.close();
+
+
+
+        return  true;
+    }
+    public boolean deleteData(String tableName, String whereClause, String [] whereParams)
+    {
+        database = getWritableDatabase();
+
+        ContentValues updateParams = new ContentValues();
+
+        database.delete(tableName,whereClause,whereParams);
+
+        database.close();
+
+
+
+        return  true;
     }
 
 }
