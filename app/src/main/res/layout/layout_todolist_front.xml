@@ -1,41 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/lib/com.jalaj.firstapp.todolist"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <CheckBox
-        android:text=""
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tdCbNote"
-        android:layout_weight="1" />
-
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:layout_weight="7"
-        android:id="@+id/tdTxtNote" />
-
-    <Button
-        android:text="Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_weight="1"
-        android:contentDescription=""
-        android:id="@+id/tdBtnReminder" />
-    <Button
-        android:text="Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_weight="1"
-        android:contentDescription=""
-        android:id="@+id/tdBtnDelete" />
-
-
-
+    <include layout="@layout/layout_note_front_child_1"></include>
+    <include layout="@layout/layout_note_front_child_2"></include>
+    <include layout="@layout/layout_note_front_child_3"></include>
 </LinearLayout>

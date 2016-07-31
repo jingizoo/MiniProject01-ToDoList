@@ -5,7 +5,7 @@
     android:id="@+id/content_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jalaj.firstapp.todolist.MainActivity"
+    tools:context="com.jalaj.firstapp.todolist.activity.MainActivity"
     tools:showIn="@layout/activity_main">
 
     <TextView

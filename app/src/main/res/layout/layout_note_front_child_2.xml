@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:orientation="horizontal"
+        android:id="@+id/layout_note_front_c2"
+        >
+        <CheckBox
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tdCbNote"
+            android:gravity="center_horizontal"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text=""
+
+            android:layout_height="wrap_content"
+
+            android:gravity="center_vertical"
+            android:layout_weight="9"
+            android:id="@+id/tdTxtNote"
+            android:layout_width="300dp"
+
+                android:background="@color/tdWhite"
+
+            />
+
+        <Button
+
+            android:drawableEnd="@drawable/ic_schedule"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_weight="0.1"
+            android:id="@+id/tdBtnReminder"
+            android:padding="3dp"
+            android:background="@color/tdWhite"
+            />
+        <Button
+            android:drawableEnd="@drawable/ic_remove_circle_18pt"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:id="@+id/tdBtnDelete"
+            android:padding="3dp"
+            android:layout_weight="0.1"
+            android:background="@color/tdWhite"
+          />
+
+
+
+</LinearLayout>

@@ -48,7 +48,7 @@ public class ToDoListDB extends SQLiteOpenHelper {
 
     private String getCreateQuery(String tableName, String [][] colName)
     {
-        String template = "CREATE TABLE "+ tableName + "(";
+        String template = "CREATE TABLE IF NOT EXISTS "+ tableName + "(";
 
         for(int i=0;i<colName.length;i++)
         {
@@ -63,24 +63,34 @@ public class ToDoListDB extends SQLiteOpenHelper {
     public String dropTable(String tableName)
     {
 
-       return "DROP TABLE "+ tableName;
+       return "DROP TABLE IF EXISTS "+ tableName;
     }
     public void fillMetaData()
     {
         database = getWritableDatabase();
 
+       if (getSelectSQL(TD_CATEGORY_TBL,new String[]{"count(1)"}," 1=1 ",new String[]{}).getInt(0)>0) return;
         //Reminder Table
         ContentValues values = new ContentValues();
         values.put("description","ONE_TIME");
+        database.delete(TD_CATEGORY_TBL,"1=1",null);
         database.delete(TD_REMINDER_MASTER_TBL,"1=1",null);
         database.insert(TD_REMINDER_MASTER_TBL,null,values);
 
         values = new ContentValues();
-        values.put("description","HOUSEHOLD");
-        values.put("description","OFFICE");
-        values.put("description","FRIENDS");
-        database.delete(TD_CATEGORY_TBL,"1=1",null);
+        values.put("description","ARCHIVED");
         database.insert(TD_CATEGORY_TBL,null,values);
+        values = new ContentValues();
+        values.put("description","HOUSEHOLD");
+        database.insert(TD_CATEGORY_TBL,null,values);
+        values.put("description","OFFICE");
+        database.insert(TD_CATEGORY_TBL,null,values);
+        values.put("description","FRIENDS");
+        database.insert(TD_CATEGORY_TBL,null,values);
+
+
+
+
 
         database.close();
 
@@ -91,28 +101,29 @@ public class ToDoListDB extends SQLiteOpenHelper {
 
         database = getWritableDatabase();
         String [][] colArray0 = {{"category_id","INTEGER","PRIMARY KEY"},{"description","TEXT"," "}};
-        database.execSQL( dropTable(TD_CATEGORY_TBL));
+        //database.execSQL( dropTable(TD_CATEGORY_TBL));
         database.execSQL(getCreateQuery(TD_CATEGORY_TBL,colArray0));
         //create reminder master table
         String [][] colArray1 = {{"reminder_id","INTEGER","PRIMARY KEY"},{"description","TEXT"," "}};
-        database.execSQL( dropTable(TD_REMINDER_MASTER_TBL));
+       // database.execSQL( dropTable(TD_REMINDER_MASTER_TBL));
         database.execSQL(getCreateQuery(TD_REMINDER_MASTER_TBL,colArray1));
         //create note master table
-        database.execSQL(dropTable(TD_NOTE_MASTER_TBL));
+        //database.execSQL(dropTable(TD_NOTE_MASTER_TBL));
         String [][] colArray2 = {{"note_id","INTEGER","PRIMARY KEY"},{"content","TEXT"," "},{"last_updated_dttm","TEXT"," "},{"created_dttm","TEXT"," "}};
         database.execSQL(getCreateQuery(TD_NOTE_MASTER_TBL,colArray2));
         //create category table
         String [][] colArray3 = {{"note_id","INTEGER",""},{"category_id","INTEGER"," "}};
-        database.execSQL( dropTable(TD_NOTE_CATEGORY_TBL));
+       // database.execSQL( dropTable(TD_NOTE_CATEGORY_TBL));
         database.execSQL(getCreateQuery(TD_NOTE_CATEGORY_TBL,colArray3));
         //create category table
         String [][] colArray4 = {{"note_id","INTEGER",""},{"priority","TEXT"," "},{"done_flag","INTEGER",""}};
-        database.execSQL(dropTable(TD_NOTE_PRIORITY_TBL));
+       // database.execSQL(dropTable(TD_NOTE_PRIORITY_TBL));
         database.execSQL(getCreateQuery(TD_NOTE_PRIORITY_TBL,colArray4));
         //create category table
-        String [][] colArray5 = {{"note_id","INTEGER",""},{"reminder_id","INTEGER"," "}};
-        database.execSQL(dropTable(TD_NOTE_REMINDER_TBL));
+        String [][] colArray5 = {{"note_id","INTEGER",""},{"reminder_id","INTEGER"," "},{"remind_dttm","TEXT"," "}};
+       // database.execSQL(dropTable(TD_NOTE_REMINDER_TBL));
         database.execSQL(getCreateQuery(TD_NOTE_REMINDER_TBL,colArray5));
+        database.close();
     }
     public Cursor getSelectSQL(String tableName, String [] colName, String whereClause, String [] parameters)
     {
@@ -129,7 +140,9 @@ public class ToDoListDB extends SQLiteOpenHelper {
         }
        Cursor cursor =  database.rawQuery(template,parameters);
         cursor.moveToFirst();
+        database.close();
         return cursor;
+
     }
     private void testData()
     {
@@ -160,6 +173,7 @@ public class ToDoListDB extends SQLiteOpenHelper {
         for (int i=0; i<updateValues.length;i++)
             updateParams.put(updateValues[i][0],updateValues[i][1]);
 
+        //Log.d("Total Updated",""+"");
         database.update(tableName,updateParams,whereClause,whereParams);
 
         database.close();

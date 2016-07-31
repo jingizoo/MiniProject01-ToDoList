@@ -20,25 +20,14 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/tdlstVwNoteFront"/>
+            android:id="@+id/tdlstVwNoteFront"
+            android:background="@color/tdWhite"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <Button
-            android:text="Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tdBtnDeleteAll"
-            android:layout_weight="0.03" />
-        <Button
-            android:text="Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tdBtnMarkAllDone"
-            android:layout_weight="0.03" />
     </LinearLayout>
 
 </LinearLayout>

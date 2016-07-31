@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/drawable_border">
+
+    <TextView
+        android:text=""
+        android:layout_marginTop="50dp"
+
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/tdTest"
+        android:gravity="center"
+
+        android:textSize="20sp"
+
+
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="50dp"
+        >
+        <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+            android:id="@+id/tdTxtFrontElapsed"
+            android:background="@color/tdRed"
+            android:gravity="center"
+            android:layout_weight="1"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tdTxtFrontPending"
+            android:background="@color/tdYellow"
+            android:layout_weight="1"
+            android:gravity="center"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tdTxtFrontScheduled"
+            android:background="@color/tdGreen"
+            android:layout_weight="1"
+            android:gravity="center"
+            />
+
+    </LinearLayout>
+</LinearLayout>

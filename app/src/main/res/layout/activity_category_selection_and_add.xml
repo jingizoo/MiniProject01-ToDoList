@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/lib/com.jalaj.firstapp.todolist"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_category_selection_and_add"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.jalaj.firstapp.todolist.activity.CategorySelectionAndAdd">
+<include layout="@layout/layout_grid_front"></include>
+</android.support.constraint.ConstraintLayout>

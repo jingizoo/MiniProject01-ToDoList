@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">ToDoList</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_create_add_category">CreateAddCategory</string>
+    <string name="title_activity_add_update_item">AddUpdateItem</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_front_view">FrontView</string>
 </resources>

@@ -6,7 +6,7 @@ package com.jalaj.firstapp.todolist.model;
 
 public class ReminderTypes {
     int reminder_id;
-    String description;
+    public String description;
 
     public ReminderTypes(int reminder_id, String description) {
         this.reminder_id = reminder_id;
